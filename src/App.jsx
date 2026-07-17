@@ -159,12 +159,12 @@ function App() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: '🌱', title: 'Plant Sales', zh: '植物銷售', desc: 'Wide selection of indoor, outdoor, tropical, and seasonal plants for every space and budget.', zhDesc: '提供各類室內、室外、熱帶及季節性植物，適合各種空間及預算。' },
-              { icon: '🏡', title: 'Landscaping', zh: '園景設計', desc: 'Professional landscape design and installation tailored to your property and vision.', zhDesc: '專業園景設計及施工服務，為您的物業度身打造理想園景。' },
+              { icon: '🌱', title: 'Plant Rental', zh: '植物租賃', desc: 'Wide selection of indoor, outdoor, tropical, and seasonal plants for every space and budget.', zhDesc: '提供各類室內、室外、熱帶及季節性植物，適合各種空間及預算。' },
+              { icon: '⚙️', title: 'Landscape Engineering', zh: '綠化工程', desc: 'Landscape Engineering on different projects.', zhDesc: '不同企劃的綠化工程。' },
               { icon: '✂️', title: 'Garden Maintenance', zh: '花園護理', desc: 'Regular pruning, fertilizing, and care to keep your garden thriving year-round.', zhDesc: '定期修剪、施肥及護理，讓您的花園四季常青。' },
               { icon: '🪴', title: 'Potting & Repotting', zh: '換盆服務', desc: 'Expert potting services using premium soil mixes for healthy root development.', zhDesc: '採用優質土壤配方，提供專業換盆服務，促進健康根系生長。' },
-              { icon: '🚚', title: 'Delivery & Installation', zh: '送貨及安裝', desc: 'Same-week delivery and installation of plants and arrangements to your location.', zhDesc: '本週內完成植物及花藝陳設的送貨及安裝服務。' },
-              { icon: '📋', title: 'Garden Consultation', zh: '花園諮詢', desc: 'One-on-one sessions with our horticulturists to plan your perfect green space.', zhDesc: '與我們的園藝師進行一對一諮詢，規劃您的理想綠色空間。' },
+              { icon: '🚚', title: 'Delivery & Installation', zh: '送貨及安裝', desc: 'Delivery and installation of plants and arrangements to your location.', zhDesc: '植物及花藝陳設的送貨及安裝服務。' },
+              { icon: '🌹', title: 'Season Potted Plants', zh: '季節性植物', desc: 'Provide seasonal and festive plants', zhDesc: '提供不同季節性及節日性植物' },
             ].map(service => (
               <div key={service.title} className="bg-green-50 rounded-2xl p-6 hover:shadow-md transition-shadow">
                 <div className="text-4xl mb-4">{service.icon}</div>
