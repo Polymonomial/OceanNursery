@@ -1,0 +1,336 @@
+import { useState, useEffect } from 'react'
+import logo from './assets/ocean_logo_exact_no_background_upscaled.png'
+import logowhite from './assets/logowhite.png'
+import slide1 from './assets/carasole/Image_20260624022222_153_10.jpg'
+import slide2 from './assets/carasole/Image_20260624023151_166_10.jpg'
+import slide3 from './assets/carasole/Image_20260624023228_168_10.jpg'
+import slide4 from './assets/carasole/Image_20260624023342_171_10.jpg'
+import slide5 from './assets/carasole/Image_20260624023504_175_10.jpg'
+import slide6 from './assets/carasole/Image_20260624023546_180_10.jpg'
+import slide7 from './assets/carasole/Image_20260624023801_190_10.jpg'
+import slide8 from './assets/carasole/Image_20260624024047_198_10.jpg'
+import slide9 from './assets/carasole/Image_20260624024421_205_10.jpg'
+import slide10 from './assets/carasole/Image_20260624024526_211_10.jpg'
+import './App.css'
+
+const heroSlides = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9, slide10]
+
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [heroIndex, setHeroIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroIndex(i => (i + 1) % heroSlides.length)
+    }, 4500)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="font-sans text-gray-800">
+
+      {/* ── Navbar ── */}
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <img src={logo} alt="Ocean Nurseries & Landscaping Design Ltd." className="h-12 w-auto" />
+          </div>
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
+            <a href="#about" className="hover:text-green-700 transition-colors">About</a>
+            <a href="#services" className="hover:text-green-700 transition-colors">Services</a>
+            
+            <a href="#gallery" className="hover:text-green-700 transition-colors">Gallery</a>
+            <a href="#contact" className="hover:text-green-700 transition-colors">Contact</a>
+          </nav>
+
+          <a href="#contact" className="hidden md:inline-block bg-green-700 text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-green-800 transition-colors">
+            Get a Quote
+          </a>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden text-gray-600 focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {menuOpen
+                ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              }
+            </svg>
+          </button>
+        </div>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-100 px-4 pb-4 flex flex-col gap-3 text-sm font-medium text-gray-600">
+            <a href="#services" onClick={() => setMenuOpen(false)} className="hover:text-green-700">Services</a>
+            <a href="#about" onClick={() => setMenuOpen(false)} className="hover:text-green-700">About</a>
+            <a href="#gallery" onClick={() => setMenuOpen(false)} className="hover:text-green-700">Gallery</a>
+            <a href="#contact" onClick={() => setMenuOpen(false)} className="hover:text-green-700">Contact</a>
+            <a href="#contact" className="bg-green-700 text-white text-center px-5 py-2 rounded-full hover:bg-green-800 transition-colors">Get a Quote</a>
+          </div>
+        )}
+      </header>
+
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden py-28 px-4 text-center">
+        {/* Carousel background */}
+        {heroSlides.map((img, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 transition-opacity duration-1000"
+            style={{
+              opacity: i === heroIndex ? 1 : 0,
+              backgroundImage: `url(${img})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        ))}
+        {/* Dim overlay */}
+        <div className="absolute inset-0 bg-green-950/65" />
+        {/* Content */}
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <p className="text-white font-semibold tracking-widest uppercase text-sm mb-4">
+            Serving Macau Since 1979 &nbsp;·&nbsp; 自1979年服務澳門
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-3">
+            Macau's Trusted Nursery &amp; Landscaping Experts
+          </h1>
+          <p className="text-white text-2xl md:text-3xl font-semibold mb-6">
+            澳門信賴的苗圃及園景設計專家
+          </p>
+          <p className="text-white text-base md:text-lg mb-2 max-w-xl mx-auto">
+            Over 40 years of plant supply, rental, maintenance, and professional landscape design — serving hotels, government departments, and public spaces across Macau.
+          </p>
+          <p className="text-white text-sm md:text-base mb-10 max-w-xl mx-auto">
+            逾40年植物供應、租賃、維護及專業園景設計服務，為澳門各大酒店、政府部門及公共場所提供優質綠化方案。
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#services" className="bg-green-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-green-500 transition-colors">
+              Explore Services
+            </a>
+            <a href="#contact" className="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white/10 transition-colors">
+              Contact Us
+            </a>
+          </div>
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-10">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setHeroIndex(i)}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  i === heroIndex ? 'bg-white' : 'bg-white/30'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Stats ── */}
+      <section className="bg-green-700 text-white py-10 px-4">
+        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[
+            { value: '500+', label: 'Plant Species' },
+            { value: '12+', label: 'Years Experience' },
+            { value: '3,000+', label: 'Happy Clients' },
+            { value: '100%', label: 'Organic Options' },
+          ].map(stat => (
+            <div key={stat.label}>
+              <p className="text-3xl font-bold">{stat.value}</p>
+              <p className="text-green-200 text-sm mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Services ── */}
+      <section id="services" className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-green-600 font-semibold uppercase tracking-widest text-sm">What We Offer</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Our Services</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { icon: '🌱', title: 'Plant Sales', desc: 'Wide selection of indoor, outdoor, tropical, and seasonal plants for every space and budget.' },
+              { icon: '🏡', title: 'Landscaping', desc: 'Professional landscape design and installation tailored to your property and vision.' },
+              { icon: '✂️', title: 'Garden Maintenance', desc: 'Regular pruning, fertilizing, and care to keep your garden thriving year-round.' },
+              { icon: '🪴', title: 'Potting & Repotting', desc: 'Expert potting services using premium soil mixes for healthy root development.' },
+              { icon: '🚚', title: 'Delivery & Installation', desc: 'Same-week delivery and installation of plants and arrangements to your location.' },
+              { icon: '📋', title: 'Garden Consultation', desc: 'One-on-one sessions with our horticulturists to plan your perfect green space.' },
+            ].map(service => (
+              <div key={service.title} className="bg-green-50 rounded-2xl p-6 hover:shadow-md transition-shadow">
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-lg font-bold text-green-900 mb-2">{service.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── About ── */}
+      <section id="about" className="py-20 px-4 bg-emerald-50">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+          <div className="flex-1 text-center md:text-left">
+            <p className="text-green-600 font-semibold uppercase tracking-widest text-sm">Our Story</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">Rooted in Passion, <br /> Growing with Purpose</h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              Established in 1979 in Macau, Ocean Nurseries and Landscaping Design Ltd has been serving Macau with heart and professionalism for more than 40 years. 
+
+Today, the company has expanded to grow a wide variety of top quality, hardy plants spread over 1,000 square meter of land in Macau with a strong support on nursery supply from 60 acres of land in Guangdong China. We have provided horticulture services to over 100 major hotels, government departments, schools and other public utilities since opening. Quality plant supply, rental and maintenance services are not our only strengths, but we also provide professional indoor and outdoor landscape designs.
+
+We have a professional team of close to 70 experienced and knowledgeable, well-trained and most of all sincere staff who are ready to render assistance to you in addressing your specific needs in greenery, horticulture and landscaping design.
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-8">
+              We believe every space deserves a touch of nature. Our team of certified horticulturists and landscapers work with homeowners, businesses, and communities to create beautiful, sustainable green environments.
+            </p>
+            <a href="#contact" className="bg-green-700 text-white font-semibold px-8 py-3 rounded-full hover:bg-green-800 transition-colors">
+              Meet Our Team
+            </a>
+          </div>
+          <div className="flex-1 grid grid-cols-2 gap-4">
+            {['🌺', '🌵', '🍃', '🌸'].map((emoji, i) => (
+              <div key={i} className="bg-white rounded-2xl h-36 flex items-center justify-center text-5xl shadow-sm">
+                {emoji}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Gallery ── */}
+      <section id="gallery" className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-green-600 font-semibold uppercase tracking-widest text-sm">Our Work</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Garden Gallery</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {['🌿', '🌹', '🌴', '🌻', '🪷', '🌾', '🍀', '🌲'].map((emoji, i) => (
+              <div key={i} className="bg-green-50 rounded-2xl h-40 flex items-center justify-center text-5xl hover:bg-green-100 transition-colors cursor-pointer">
+                {emoji}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Clients ── */}
+      <section className="py-20 px-4 bg-green-700 text-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-green-300 font-semibold uppercase tracking-widest text-sm">Trusted By</p>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2">Our Clients</h2>
+            <p className="text-green-200 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
+              We are proud to provide greenery, horticulture, and landscaping services to some of Macau's most prestigious hotels and resorts.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { zh: '澳門金沙', en: 'Sands Macao' },
+              { zh: '澳門威尼斯人', en: 'The Venetian Macao' },
+              { zh: '百利沙娛樂場', en: 'The Plaza Macao' },
+              { zh: '喜來登金沙城中心大酒店', en: 'Sheraton Grand Macao' },
+              { zh: '金沙城中心假日酒店', en: 'Holiday Inn Macao Cotai Central' },
+              { zh: '澳門星際酒店', en: 'StarWorld Macau' },
+              { zh: '新濠鋒酒店', en: 'Altira Macau' },
+              { zh: '駿景酒店', en: 'Taipa Square Hotel' },
+              { zh: '皇都酒店', en: 'Hotel Royal' },
+              { zh: '財神酒店', en: 'Fortuna Hotel' },
+              { zh: '總統酒店', en: 'President Hotel' },
+              { zh: '聖地牙哥古堡酒店', en: 'Pousada de São Tiago' },
+              { zh: '金皇冠中國大酒店', en: 'Golden Crown China Hotel' },
+              { zh: '澳門國際機場', en: 'Macau International Airport' },
+              { zh: '澳門市政廳', en: 'Provisional Municipal Council of Macau (IACM)' },
+              { zh: '山頂醫院', en: 'Centro Hospitalar' },
+              { zh: '新港澳碼頭前地', en: 'Outer Harbour Ferry Terminal' },
+              { zh: '澳門博物館', en: 'Macau Museum' },
+              { zh: '黑沙公園', en: 'Hac Sa Park' },
+              { zh: '石排灣公園', en: 'Seac Pai Van Park' },
+              { zh: '祐漢公園', en: 'Iao Hon Park' },
+              { zh: '望廈山公園', en: 'Mong Ha Park' },
+              { zh: '何賢公園', en: 'Ho Yin Park' },
+            ].map(client => (
+              <div key={client.en} className="bg-green-800 hover:bg-green-600 transition-colors rounded-2xl px-4 py-5 flex flex-col items-center text-center gap-1">
+                <p className="text-white font-semibold text-sm leading-snug">{client.zh}</p>
+                <p className="text-green-300 text-xs leading-snug">{client.en}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Contact ── */}
+      <section id="contact" className="py-20 px-4 bg-white">
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <p className="text-green-600 font-semibold uppercase tracking-widest text-sm">Get in Touch</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Request a Quote</h2>
+          <p className="text-gray-500 mt-4">Fill out the form below and our team will get back to you within 24 hours.</p>
+        </div>
+        <form className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input type="text" placeholder="Your Name" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm" />
+          <input type="email" placeholder="Email Address" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm" />
+          <input type="tel" placeholder="Phone Number" className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm" />
+          <select className="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm text-gray-500">
+            <option value="">Select a Service</option>
+            <option>Plant Sales</option>
+            <option>Landscaping</option>
+            <option>Garden Maintenance</option>
+            <option>Delivery & Installation</option>
+            <option>Garden Consultation</option>
+          </select>
+          <textarea placeholder="Tell us about your project..." rows={4} className="sm:col-span-2 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm resize-none" />
+          <button type="submit" className="sm:col-span-2 bg-green-700 text-white font-semibold py-3 rounded-full hover:bg-green-800 transition-colors">
+            Send Message
+          </button>
+        </form>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="bg-green-900 text-green-200 py-12 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <div className="mb-3">
+              <img src={logowhite} alt="Ocean Nurseries & Landscaping Design Ltd."  />
+            </div>
+            <p className="text-sm leading-relaxed">Premium plants and landscaping services rooted in passion and grown with purpose.</p>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold mb-3">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
+              <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#gallery" className="hover:text-white transition-colors">Gallery</a></li>
+              <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold mb-3">Contact Info</h4>
+            <ul className="space-y-2 text-sm">
+              <li>📍 123 Garden Lane, Coastal City</li>
+              <li>📞 (555) 012-3456</li>
+              <li>✉️ hello@oceannursery.com</li>
+              <li>🕐 Mon–Sat: 8am – 6pm</li>
+            </ul>
+          </div>
+        </div>
+        <div className="border-t border-green-800 pt-6 text-center text-xs text-green-400">
+          © {new Date().getFullYear()} Ocean Nursery. All rights reserved.
+        </div>
+      </footer>
+
+    </div>
+  )
+}
+
+export default App
+
